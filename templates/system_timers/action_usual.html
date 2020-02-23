@@ -10,7 +10,7 @@ $(document).ready(function(){
 	var index = num;
 
 	[#if SET_AJAX!=''#]
-	setInterval(function() {
+	var timerAjax = setInterval(function() {
 		$.ajax({
 			url: '/module/system_timers.html?type=ajax&timerName=[#TIMEREXISTS_NAME#]',
 			success: function(data) {
@@ -37,6 +37,7 @@ $(document).ready(function(){
 
 	setTimeout(function() {
 	  clearInterval(timerId);
+	  clearInterval(timerAjax);
 	}, num*1000);
 });
 </script>
