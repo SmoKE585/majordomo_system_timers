@@ -30,6 +30,51 @@ $(document).ready(function(){
 			[#if SET_TIME=='m'#]
 				timerBlock.html(Math.round(--index/60));
 			[#endif#]
+			[#if SET_TIME=='h:m:s'#]
+				timeToEnd = --index;
+				sec = timeToEnd;
+				days = Math.floor(sec/60/60/24);
+				sec -= days*24*60*60;
+				hours = Math.floor(sec/60/60);
+				sec -= hours*60*60;
+				min = Math.floor(sec/60);
+				sec -= min*60;
+				if(hours <= 9) hours = '0' + hours;
+				if(min <= 9) min = '0' + min;
+				if(sec <= 9) sec = '0' + sec;
+				
+				timerBlock.html(hours + ':' + min + ':' + sec);
+			[#endif#]
+			[#if SET_TIME=='m:s'#]
+				timeToEnd = --index;
+				sec = timeToEnd;
+				days = Math.floor(sec/60/60/24);
+				sec -= days*24*60*60;
+				hours = Math.floor(sec/60/60);
+				sec -= hours*60*60;
+				min = Math.floor(sec/60);
+				sec -= min*60;
+				if(hours <= 9) hours = '0' + hours;
+				if(min <= 9) min = '0' + min;
+				if(sec <= 9) sec = '0' + sec;
+				
+				timerBlock.html(min + ':' + sec);
+			[#endif#]
+			[#if SET_TIME=='h:m'#]
+				timeToEnd = --index;
+				sec = timeToEnd;
+				days = Math.floor(sec/60/60/24);
+				sec -= days*24*60*60;
+				hours = Math.floor(sec/60/60);
+				sec -= hours*60*60;
+				min = Math.floor(sec/60);
+				sec -= min*60;
+				if(hours <= 9) hours = '0' + hours;
+				if(min <= 9) min = '0' + min;
+				if(sec <= 9) sec = '0' + sec;
+				
+				timerBlock.html(hours + ':' + min);
+			[#endif#]
 		[#else#]
 			timerBlock.html(--index);
 		[#endif#]
