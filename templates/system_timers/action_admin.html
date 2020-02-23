@@ -54,12 +54,12 @@
 		  <td valign="middle" style="vertical-align: middle;">[#PROCESSED#]</td>
 		  <td valign="middle" style="vertical-align: middle;">[#STARTED#]</td>
 		  <td valign="middle" style="vertical-align: middle;"><span id="timerTimeID_[#ID#]">[#TIMEREXISTS#]</span> сек.</td>
-		  <td valign="middle" style="vertical-align: middle;"><button type="button" class="btn btn-sm btn-default" onclick="$('#modalCodeCopy').modal('show');$('#codeModal').text('[ #module name=\'system_timers\' mode=\'[#TITLE#]\'#]');">Код для вставки</button></td>
+		  <td valign="middle" style="vertical-align: middle;"><button type="button" class="btn btn-sm btn-default" onclick="$('#codeModal').text('[ #module name=\'system_timers\' mode=\'[#TITLE#]\'#]');$('#codeModalAdd').text('[ #module name=\'system_timers\' mode=\'[#TITLE#]\' view_mode=\'ajax=5;time=m\'#]');$('#modalCodeCopy').modal('show');">Код для вставки</button></td>
 	   </tr>
 	   [#end ALLTIMERS#]
 	   </tbody>
 	</table> 
-</div>
+</div> 
 
 <div id="modalCodeCopy" class="modal fade">
 	<div class="modal-dialog">
@@ -70,13 +70,11 @@
 			</div>
 			<div class="modal-body">
 				Используйте следующий код для вставки в сцена или меню:
-				<div style="margin-top: 10px;">
-					<code id="codeModal">
-					</code>
-				</div>
+				<div style="margin-top: 10px;background-color: #f9f2f4;padding: 10px;border-radius: 10px;border: 1px solid #f1acac;font-size: 1.3rem;color: #c7254e;" id="codeModal"></div>
 				<p style="margin-top: 10px;font-size: 1rem;border: 1px dotted red;padding: 7px;border-radius: 10px;">* Не забудьте убрать пробел в начале: [ #module name= иначе работать не будет!<br>
 				Так же, вы можете добавить параметры view_mode="ajax=5;time=m", чтобы обновлять таймер каждые 5 секунд, а вывод будет в минутах(m) или в секундах(s) 
 				</p>
+				<div style="margin-top: 10px;background-color: #f9f2f4;padding: 10px;border-radius: 10px;border: 1px solid #f1acac;font-size: 1.3rem;color: #c7254e;" id="codeModalAdd"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>

@@ -4,7 +4,7 @@ class system_timers extends module {
     $this->name="system_timers";
     $this->title="Системные таймеры";
     $this->module_category="<#LANG_SECTION_SYSTEM#>";
-    $this->version="1.2";
+    $this->version="1.3";
     $this->checkInstalled();
   }
 
@@ -122,7 +122,7 @@ class system_timers extends module {
 			if($diff < 0) $diff = 0;
 			return $diff;
 		} else {
-			return 'error';
+			return 'Таймер сейчас не активен';
 		}
 	}
 
