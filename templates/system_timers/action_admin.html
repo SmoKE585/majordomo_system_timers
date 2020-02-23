@@ -1,0 +1,68 @@
+<div class="form-group" style="margin-right: 5px; margin-left: 5px;">
+	<table class="table table-stripped" style="font-size: 1.2rem;">
+		<thead><tr>
+			<th>ID</th>
+			<th>Имя</th>
+			<th>Команда</th>
+			<th>Статус</th>
+			<th>Последний запуск</th>
+			<th>Осталось</th>
+			<th>Управление</th>
+		</tr></thead>
+		<tbody>
+	   [#begin ALLTIMERS#]
+		<script>
+		$(document).ready(function(){
+			var timerBlock = $('#timerTimeID_[#ID#]');
+			var num = [#TIMEREXISTS#];
+
+			var index = num;
+			var timerId = setInterval(function() {
+			  timerBlock.html(--index);
+			}, 1000);
+
+			setTimeout(function() {
+			  clearInterval(timerId);
+			}, num*1000);
+		});
+		</script>
+	   <tr>
+		  <td valign="middle" style="vertical-align: middle;width: 15%;">[#ID#]</td>
+		  <td valign="middle" style="vertical-align: middle;">[#TITLE#]</td>
+		  <td valign="middle" style="vertical-align: middle;">[#COMMANDS#]</td>
+		  <td valign="middle" style="vertical-align: middle;">[#PROCESSED#]</td>
+		  <td valign="middle" style="vertical-align: middle;">[#STARTED#]</td>
+		  <td valign="middle" style="vertical-align: middle;"><span id="timerTimeID_[#ID#]">[#TIMEREXISTS#]</span> сек.</td>
+		  <td valign="middle" style="vertical-align: middle;"><button type="button" class="btn btn-sm btn-default" onclick="$('#modalCodeCopy').modal('show');$('#codeModal').text('[ #module name=\'system_timers\' mode=\'[#TITLE#]\'#]');">Код для вставки</button></td>
+	   </tr>
+	   [#end ALLTIMERS#]
+	   </tbody>
+	</table> 
+</div>
+
+<div id="modalCodeCopy" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">Код для использования</h4>
+			</div>
+			<div class="modal-body">
+				Используйте следующий код для вставки в сцена или меню:
+				<div style="margin-top: 10px;">
+					<code id="codeModal">
+					</code>
+				</div>
+				<p style="margin-top: 10px;font-size: 1rem;border: 1px dotted red;padding: 7px;border-radius: 10px;">* Не забудьте убрать пробел в начале: [ #module name= иначе работать не будет!</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="margin-top: 40px;">
+	<div class="col-md-12" style="text-align: center;border-top: 1px solid #e7e7e7;padding-top: 15px;font-size: 1rem;color: gray;">
+		Версия модуля: <i class="las la-code-branch" style="vertical-align: middle;"></i> v.[#VERSION_MODULE#] | Проект доступен на <a href="https://github.com/SmoKE585/majordomo_system_timers" target="_blank"><i class="lab la-github"></i> GitHub</a> | Автор: Александр SmoKE xD Аболмасов
+	</div>
+</div>

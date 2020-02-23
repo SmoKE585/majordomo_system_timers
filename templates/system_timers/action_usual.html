@@ -1,0 +1,18 @@
+[#if TIMEREXISTS!=''#]
+<script>
+$(document).ready(function(){
+	var timerBlock = $('#timerTimeID_[#TIMEREXISTS_ID#]');
+	var num = [#TIMEREXISTS#];
+
+	var index = num;
+	var timerId = setInterval(function() {
+	  timerBlock.html(--index);
+	}, 1000);
+
+	setTimeout(function() {
+	  clearInterval(timerId);
+	}, num*1000);
+});
+</script>
+<span id="timerTimeID_[#TIMEREXISTS_ID#]">[#TIMEREXISTS#]</span> сек.
+[#endif#]
