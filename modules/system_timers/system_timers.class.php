@@ -4,7 +4,7 @@ class system_timers extends module {
     $this->name="system_timers";
     $this->title="Системные таймеры";
     $this->module_category="<#LANG_SECTION_SYSTEM#>";
-    $this->version="1.0";
+    $this->version="1.1";
     $this->checkInstalled();
   }
 
@@ -87,12 +87,32 @@ class system_timers extends module {
 
 	function usual(&$out) {
 		$this->admin($out);
+		global $type;
+		global $timerid;
+		
+		$this->type = $_GET['type'];
+		$this->timerName = $_GET['timerName'];
+		
+		if($this->type == 'ajax' && !empty($this->timerName)) {
+			$getTimerID = SQLSelectOne("SELECT ID FROM jobs WHERE TITLE='".dbSafe($this->timerName)."'");
+			$out['TIMEREXISTS_AJAX'] = $this->timerExists($getTimerID['ID']);
+		}
+		
 		if(!empty($this->mode)) {
-			$timer_job = SQLSelectOne("SELECT ID FROM jobs WHERE TITLE='Cron_Каждые 30 минут'");
+			$timer_job = SQLSelectOne("SELECT ID,TITLE FROM jobs WHERE TITLE='".dbSafe($this->mode)."'");
 			$diff = $this->timerExists($timer_job['ID']);
 			$out['TIMEREXISTS'] = $diff;
 			$out['TIMEREXISTS_ID'] = $timer_job['ID'];
-		}			
+			$out['TIMEREXISTS_NAME'] = $timer_job['TITLE'];
+
+			if(!empty($this->view_mode)) {
+				$params = explode(';', $this->view_mode);
+				foreach($params as $key => $value) {
+					$params_get = explode('=', $value);
+					$out[mb_strtoupper('SET_'.$params_get[0])] = $params_get[1];
+				}
+			}
+		}
 	}
 
 	function timerExists($timerID) {

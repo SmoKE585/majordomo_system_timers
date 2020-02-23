@@ -1,3 +1,6 @@
+[#if TIMEREXISTS_AJAX!=''#]
+--TIME_AJAX--[#TIMEREXISTS_AJAX#]--TIME_AJAX--
+[#endif#]
 [#if TIMEREXISTS!=''#]
 <script>
 $(document).ready(function(){
@@ -5,8 +8,31 @@ $(document).ready(function(){
 	var num = [#TIMEREXISTS#];
 
 	var index = num;
+
+	[#if SET_AJAX!=''#]
+	setInterval(function() {
+		$.ajax({
+			url: '/module/system_timers.html?type=ajax&timerName=[#TIMEREXISTS_NAME#]',
+			success: function(data) {
+				explodeTrashMJDM = data.split('--TIME_AJAX--');
+				num = explodeTrashMJDM[1];
+				index = explodeTrashMJDM[1];
+			}
+		});
+	}, [#SET_AJAX#]000);
+	[#endif#]
+	
 	var timerId = setInterval(function() {
-	  timerBlock.html(--index);
+		[#if SET_TIME!=''#]
+			[#if SET_TIME=='s'#]
+				timerBlock.html(--index);
+			[#endif#]
+			[#if SET_TIME=='m'#]
+				timerBlock.html(Math.round(--index/60));
+			[#endif#]
+		[#else#]
+			timerBlock.html(--index);
+		[#endif#]
 	}, 1000);
 
 	setTimeout(function() {
