@@ -15,6 +15,8 @@ $(document).ready(function(){
 			url: '/module/system_timers.html?type=ajax&timerName=[#TIMEREXISTS_NAME#]',
 			success: function(data) {
 				explodeTrashMJDM = data.split('--TIME_AJAX--');
+				console.log('AJAX - ' + explodeTrashMJDM[1]);
+				$('#timerTimeID_[#TIMEREXISTS_ID#]').html(explodeTrashMJDM[1]);
 				num = explodeTrashMJDM[1];
 				index = explodeTrashMJDM[1];
 			}
@@ -81,8 +83,9 @@ $(document).ready(function(){
 	}, 1000);
 
 	setTimeout(function() {
-	  clearInterval(timerId);
-	  clearInterval(timerAjax);
+		clearInterval(timerId);
+		[#if SET_WAIT!=1#]clearInterval(timerAjax);[#endif#]
+		timerBlock.html('[#SET_TEXTTOEND#]');
 	}, num*1000);
 });
 </script>

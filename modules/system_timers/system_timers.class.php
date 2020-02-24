@@ -4,7 +4,7 @@ class system_timers extends module {
     $this->name="system_timers";
     $this->title="Системные таймеры";
     $this->module_category="<#LANG_SECTION_SYSTEM#>";
-    $this->version="1.5";
+    $this->version="1.6";
     $this->checkInstalled();
   }
 
@@ -98,10 +98,14 @@ class system_timers extends module {
 			$out['TIMEREXISTS_AJAX'] = $this->timerExists($getTimerID['ID']);
 		}
 		
-		if(!empty($this->mode)) {
-			$timer_job = SQLSelectOne("SELECT ID,TITLE FROM jobs WHERE TITLE='".dbSafe($this->mode)."'");
+		if(!empty(trim($this->mode))) {
+			$timer_job = SQLSelectOne("SELECT ID,TITLE FROM jobs WHERE TITLE='".dbSafe(trim($this->mode))."'");
 			$diff = $this->timerExists($timer_job['ID']);
-			$out['TIMEREXISTS'] = $diff;
+			if(!empty($diff)) {
+				$out['TIMEREXISTS'] = $diff;
+			} else {
+				$out['TIMEREXISTS'] = 'Таймер сейчас не активен';
+			}
 			$out['TIMEREXISTS_ID'] = $timer_job['ID'];
 			$out['TIMEREXISTS_NAME'] = $timer_job['TITLE'];
 
@@ -109,7 +113,7 @@ class system_timers extends module {
 				$params = explode(';', $this->view_mode);
 				foreach($params as $key => $value) {
 					$params_get = explode('=', $value);
-					$out[mb_strtoupper('SET_'.$params_get[0])] = $params_get[1];
+					$out[mb_strtoupper('SET_'.$params_get[0])] = trim($params_get[1]);
 				}
 			}
 		}
@@ -124,10 +128,6 @@ class system_timers extends module {
 		} else {
 			return 'Таймер сейчас не активен';
 		}
-	}
-
-	function processCycle() {
-		$this->getConfig();
 	}
 
 	function install($data='') {
