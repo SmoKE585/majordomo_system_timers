@@ -4,9 +4,11 @@
 [#if TIMEREXISTS!=''#]
 <script>
 $(document).ready(function(){
+	//Блок с таймером
 	var timerBlock = $('#timerTimeID_[#TIMEREXISTS_ID#]');
-	var num = [#TIMEREXISTS#];
-
+	//Сколько нужно секунд
+	var num = [#if TIMEREXISTS=='Таймер сейчас не активен'#]0[#else#][#TIMEREXISTS#][#endif#];
+	//Переменная для отсчета
 	var index = num;
 
 	[#if SET_AJAX!=''#]
@@ -15,8 +17,10 @@ $(document).ready(function(){
 			url: '/module/system_timers.html?type=ajax&timerName=[#TIMEREXISTS_NAME#]',
 			success: function(data) {
 				explodeTrashMJDM = data.split('--TIME_AJAX--');
-				console.log('AJAX - ' + explodeTrashMJDM[1]);
-				//$('#timerTimeID_[#TIMEREXISTS_ID#]').html(explodeTrashMJDM[1]);
+				
+				if($('#timerTimeID_[#TIMEREXISTS_ID#]').text() == '[#SET_TEXTTOEND#]') {
+					$('#timerTimeID_[#TIMEREXISTS_ID#]').html(explodeTrashMJDM[1]);
+				}
 				num = explodeTrashMJDM[1];
 				index = explodeTrashMJDM[1];
 			}
@@ -27,10 +31,18 @@ $(document).ready(function(){
 	var timerId = setInterval(function() {
 		[#if SET_TIME!=''#]
 			[#if SET_TIME=='s'#]
-				timerBlock.html(--index);
+				if(index >= 0) {
+					timerBlock.html(--index);
+				} else {
+					timerBlock.html('[#SET_TEXTTOEND#]');
+				}
 			[#endif#]
 			[#if SET_TIME=='m'#]
-				timerBlock.html(Math.round(--index/60));
+				if(index >= 0) {
+					timerBlock.html(Math.round(--index/60));
+				} else {
+					timerBlock.html('[#SET_TEXTTOEND#]');
+				}
 			[#endif#]
 			[#if SET_TIME=='h:m:s'#]
 				timeToEnd = --index;
@@ -45,7 +57,11 @@ $(document).ready(function(){
 				if(min <= 9) min = '0' + min;
 				if(sec <= 9) sec = '0' + sec;
 				
-				timerBlock.html(hours + ':' + min + ':' + sec);
+				if(index >= 0) {
+					timerBlock.html(hours + ':' + min + ':' + sec);
+				} else {
+					timerBlock.html('[#SET_TEXTTOEND#]');
+				}
 			[#endif#]
 			[#if SET_TIME=='m:s'#]
 				timeToEnd = --index;
@@ -60,7 +76,11 @@ $(document).ready(function(){
 				if(min <= 9) min = '0' + min;
 				if(sec <= 9) sec = '0' + sec;
 				
-				timerBlock.html(min + ':' + sec);
+				if(index >= 0) {
+					timerBlock.html(min + ':' + sec);
+				} else {
+					timerBlock.html('[#SET_TEXTTOEND#]');
+				}
 			[#endif#]
 			[#if SET_TIME=='h:m'#]
 				timeToEnd = --index;
@@ -75,19 +95,26 @@ $(document).ready(function(){
 				if(min <= 9) min = '0' + min;
 				if(sec <= 9) sec = '0' + sec;
 				
-				timerBlock.html(hours + ':' + min);
+				if(index >= 1) {
+					timerBlock.html(hours + ':' + min);
+				} else {
+					timerBlock.html('[#SET_TEXTTOEND#]');
+				}
 			[#endif#]
 		[#else#]
-			timerBlock.html(--index);
+			if(index >= 0) { 
+				timerBlock.html(--index);
+			} else {
+				timerBlock.html('[#SET_TEXTTOEND#]');
+			}
 		[#endif#]
 	}, 1000);
 
 	setTimeout(function() {
-		clearInterval(timerId);
+		//clearInterval(timerId);
 		[#if SET_WAIT!=1#]clearInterval(timerAjax);[#endif#]
-		timerBlock.html('[#SET_TEXTTOEND#]');
 	}, num*1000);
 });
 </script>
-<span id="timerTimeID_[#TIMEREXISTS_ID#]">[#TIMEREXISTS#]</span>
+<span id="timerTimeID_[#TIMEREXISTS_ID#]">[#if TIMEREXISTS=='Таймер сейчас не активен'#]0[#else#][#TIMEREXISTS#][#endif#]</span>
 [#endif#]

@@ -4,7 +4,7 @@ class system_timers extends module {
     $this->name="system_timers";
     $this->title="Системные таймеры";
     $this->module_category="<#LANG_SECTION_SYSTEM#>";
-    $this->version="1.7";
+    $this->version="1.8";
     $this->checkInstalled();
   }
 
