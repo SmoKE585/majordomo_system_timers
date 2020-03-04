@@ -101,6 +101,25 @@ $(document).ready(function(){
 					timerBlock.html('[#SET_TEXTTOEND#]');
 				}
 			[#endif#]
+			[#if SET_TIME=='d h:m:s'#]
+				timeToEnd = --index;
+				sec = timeToEnd;
+				days = Math.floor(sec/60/60/24);
+				sec -= days*24*60*60;
+				hours = Math.floor(sec/60/60);
+				sec -= hours*60*60;
+				min = Math.floor(sec/60);
+				sec -= min*60;
+				if(hours <= 9) hours = '0' + hours;
+				if(min <= 9) min = '0' + min;
+				if(sec <= 9) sec = '0' + sec;
+				
+				if(index >= 1) {
+					timerBlock.html(days + ' ' + hours + ':' + min + ':' + sec);
+				} else {
+					timerBlock.html('[#SET_TEXTTOEND#]');
+				}
+			[#endif#]
 		[#else#]
 			if(index >= 0) { 
 				timerBlock.html(--index);
