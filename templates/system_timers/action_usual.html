@@ -5,134 +5,134 @@
 <script>
 $(document).ready(function(){
 	//Блок с таймером
-	var timerBlock = $('#timerTimeID_[#TIMEREXISTS_ID#]');
+	var timerBlock_ID[#TIMEREXISTS_ID#] = $('#timerTimeID_[#TIMEREXISTS_ID#]');
 	//Сколько нужно секунд
-	var num = [#if TIMEREXISTS=='Таймер сейчас не активен'#]0[#else#][#TIMEREXISTS#][#endif#];
+	var num_ID[#TIMEREXISTS_ID#] = [#if TIMEREXISTS=='Таймер сейчас не активен'#]0[#else#][#TIMEREXISTS#][#endif#];
 	//Переменная для отсчета
-	var index = num;
+	var index_ID[#TIMEREXISTS_ID#] = num_ID[#TIMEREXISTS_ID#];
 
 	[#if SET_AJAX!=''#]
-	var timerAjax = setInterval(function() {
+	var timerAjax_ID[#TIMEREXISTS_ID#] = setInterval(function() {
 		$.ajax({
 			url: '/module/system_timers.html?type=ajax&timerName=[#TIMEREXISTS_NAME#]',
-			success: function(data) {
-				explodeTrashMJDM = data.split('--TIME_AJAX--');
+			success: function(data_ID[#TIMEREXISTS_ID#]) {
+				explodeTrashMJDM_ID[#TIMEREXISTS_ID#] = data_ID[#TIMEREXISTS_ID#].split('--TIME_AJAX--');
 				
 				if($('#timerTimeID_[#TIMEREXISTS_ID#]').text() == '[#SET_TEXTTOEND#]') {
-					$('#timerTimeID_[#TIMEREXISTS_ID#]').html(explodeTrashMJDM[1]);
+					$('#timerTimeID_[#TIMEREXISTS_ID#]').html(explodeTrashMJDM_ID[#TIMEREXISTS_ID#][1]);
 				}
-				num = explodeTrashMJDM[1];
-				index = explodeTrashMJDM[1];
+				num_ID[#TIMEREXISTS_ID#] = explodeTrashMJDM_ID[#TIMEREXISTS_ID#][1];
+				index_ID[#TIMEREXISTS_ID#] = explodeTrashMJDM_ID[#TIMEREXISTS_ID#][1];
 			}
 		});
 	}, [#SET_AJAX#]000);
 	[#endif#]
 	
-	var timerId = setInterval(function() {
+	var timerId_ID[#TIMEREXISTS_ID#] = setInterval(function() {
 		[#if SET_TIME!=''#]
 			[#if SET_TIME=='s'#]
-				if(index >= 0) {
-					timerBlock.html(--index);
+				if(index_ID[#TIMEREXISTS_ID#] >= 0) {
+					timerBlock_ID[#TIMEREXISTS_ID#].html(--index_ID[#TIMEREXISTS_ID#]);
 				} else {
-					timerBlock.html('[#SET_TEXTTOEND#]');
+					timerBlock_ID[#TIMEREXISTS_ID#].html('[#SET_TEXTTOEND#]');
 				}
 			[#endif#]
 			[#if SET_TIME=='m'#]
-				if(index >= 0) {
-					timerBlock.html(Math.round(--index/60));
+				if(index_ID[#TIMEREXISTS_ID#] >= 0) {
+					timerBlock_ID[#TIMEREXISTS_ID#].html(Math.round(--index_ID[#TIMEREXISTS_ID#]/60));
 				} else {
-					timerBlock.html('[#SET_TEXTTOEND#]');
+					timerBlock_ID[#TIMEREXISTS_ID#].html('[#SET_TEXTTOEND#]');
 				}
 			[#endif#]
 			[#if SET_TIME=='h:m:s'#]
-				timeToEnd = --index;
-				sec = timeToEnd;
-				days = Math.floor(sec/60/60/24);
-				sec -= days*24*60*60;
-				hours = Math.floor(sec/60/60);
-				sec -= hours*60*60;
-				min = Math.floor(sec/60);
-				sec -= min*60;
-				if(hours <= 9) hours = '0' + hours;
-				if(min <= 9) min = '0' + min;
-				if(sec <= 9) sec = '0' + sec;
+				timeToEnd_ID[#TIMEREXISTS_ID#] = --index_ID[#TIMEREXISTS_ID#];
+				sec_ID[#TIMEREXISTS_ID#] = timeToEnd_ID[#TIMEREXISTS_ID#];
+				days_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60/60/24);
+				sec_ID[#TIMEREXISTS_ID#] -= days_ID[#TIMEREXISTS_ID#]*24*60*60;
+				hours_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60/60);
+				sec_ID[#TIMEREXISTS_ID#] -= hours_ID[#TIMEREXISTS_ID#]*60*60;
+				min_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60);
+				sec_ID[#TIMEREXISTS_ID#] -= min_ID[#TIMEREXISTS_ID#]*60;
+				if(hours_ID[#TIMEREXISTS_ID#] <= 9) hours_ID[#TIMEREXISTS_ID#] = '0' + hours_ID[#TIMEREXISTS_ID#];
+				if(min_ID[#TIMEREXISTS_ID#] <= 9) min_ID[#TIMEREXISTS_ID#] = '0' + min_ID[#TIMEREXISTS_ID#];
+				if(sec_ID[#TIMEREXISTS_ID#] <= 9) sec_ID[#TIMEREXISTS_ID#] = '0' + sec_ID[#TIMEREXISTS_ID#];
 				
-				if(index >= 0) {
-					timerBlock.html(hours + ':' + min + ':' + sec);
+				if(index_ID[#TIMEREXISTS_ID#] >= 0) {
+					timerBlock_ID[#TIMEREXISTS_ID#].html(hours_ID[#TIMEREXISTS_ID#] + ':' + min_ID[#TIMEREXISTS_ID#] + ':' + sec_ID[#TIMEREXISTS_ID#]);
 				} else {
-					timerBlock.html('[#SET_TEXTTOEND#]');
+					timerBlock_ID[#TIMEREXISTS_ID#].html('[#SET_TEXTTOEND#]');
 				}
 			[#endif#]
 			[#if SET_TIME=='m:s'#]
-				timeToEnd = --index;
-				sec = timeToEnd;
-				days = Math.floor(sec/60/60/24);
-				sec -= days*24*60*60;
-				hours = Math.floor(sec/60/60);
-				sec -= hours*60*60;
-				min = Math.floor(sec/60);
-				sec -= min*60;
-				if(hours <= 9) hours = '0' + hours;
-				if(min <= 9) min = '0' + min;
-				if(sec <= 9) sec = '0' + sec;
+				timeToEnd_ID[#TIMEREXISTS_ID#] = --index_ID[#TIMEREXISTS_ID#];
+				sec_ID[#TIMEREXISTS_ID#] = timeToEnd_ID[#TIMEREXISTS_ID#];
+				days_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60/60/24);
+				sec_ID[#TIMEREXISTS_ID#] -= days_ID[#TIMEREXISTS_ID#]*24*60*60;
+				hours_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60/60);
+				sec_ID[#TIMEREXISTS_ID#] -= hours_ID[#TIMEREXISTS_ID#]*60*60;
+				min_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60);
+				sec_ID[#TIMEREXISTS_ID#] -= min_ID[#TIMEREXISTS_ID#]*60;
+				if(hours_ID[#TIMEREXISTS_ID#] <= 9) hours_ID[#TIMEREXISTS_ID#] = '0' + hours_ID[#TIMEREXISTS_ID#];
+				if(min_ID[#TIMEREXISTS_ID#] <= 9) min_ID[#TIMEREXISTS_ID#] = '0' + min_ID[#TIMEREXISTS_ID#];
+				if(sec_ID[#TIMEREXISTS_ID#] <= 9) sec_ID[#TIMEREXISTS_ID#] = '0' + sec_ID[#TIMEREXISTS_ID#];
 				
-				if(index >= 0) {
-					timerBlock.html(min + ':' + sec);
+				if(index_ID[#TIMEREXISTS_ID#] >= 0) {
+					timerBlock_ID[#TIMEREXISTS_ID#].html(min_ID[#TIMEREXISTS_ID#] + ':' + sec_ID[#TIMEREXISTS_ID#]);
 				} else {
-					timerBlock.html('[#SET_TEXTTOEND#]');
+					timerBlock_ID[#TIMEREXISTS_ID#].html('[#SET_TEXTTOEND#]');
 				}
 			[#endif#]
 			[#if SET_TIME=='h:m'#]
-				timeToEnd = --index;
-				sec = timeToEnd;
-				days = Math.floor(sec/60/60/24);
-				sec -= days*24*60*60;
-				hours = Math.floor(sec/60/60);
-				sec -= hours*60*60;
-				min = Math.floor(sec/60);
-				sec -= min*60;
-				if(hours <= 9) hours = '0' + hours;
-				if(min <= 9) min = '0' + min;
-				if(sec <= 9) sec = '0' + sec;
+				timeToEnd_ID[#TIMEREXISTS_ID#] = --index_ID[#TIMEREXISTS_ID#];
+				sec_ID[#TIMEREXISTS_ID#] = timeToEnd_ID[#TIMEREXISTS_ID#];
+				days_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60/60/24);
+				sec_ID[#TIMEREXISTS_ID#] -= days_ID[#TIMEREXISTS_ID#]*24*60*60;
+				hours_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60/60);
+				sec_ID[#TIMEREXISTS_ID#] -= hours_ID[#TIMEREXISTS_ID#]*60*60;
+				min_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60);
+				sec_ID[#TIMEREXISTS_ID#] -= min_ID[#TIMEREXISTS_ID#]*60;
+				if(hours_ID[#TIMEREXISTS_ID#] <= 9) hours_ID[#TIMEREXISTS_ID#] = '0' + hours_ID[#TIMEREXISTS_ID#];
+				if(min_ID[#TIMEREXISTS_ID#] <= 9) min_ID[#TIMEREXISTS_ID#] = '0' + min_ID[#TIMEREXISTS_ID#];
+				if(sec_ID[#TIMEREXISTS_ID#] <= 9) sec_ID[#TIMEREXISTS_ID#] = '0' + sec_ID[#TIMEREXISTS_ID#];
 				
-				if(index >= 1) {
-					timerBlock.html(hours + ':' + min);
+				if(index_ID[#TIMEREXISTS_ID#] >= 1) {
+					timerBlock_ID[#TIMEREXISTS_ID#].html(hours_ID[#TIMEREXISTS_ID#] + ':' + min_ID[#TIMEREXISTS_ID#]);
 				} else {
-					timerBlock.html('[#SET_TEXTTOEND#]');
+					timerBlock_ID[#TIMEREXISTS_ID#].html('[#SET_TEXTTOEND#]');
 				}
 			[#endif#]
 			[#if SET_TIME=='d h:m:s'#]
-				timeToEnd = --index;
-				sec = timeToEnd;
-				days = Math.floor(sec/60/60/24);
-				sec -= days*24*60*60;
-				hours = Math.floor(sec/60/60);
-				sec -= hours*60*60;
-				min = Math.floor(sec/60);
-				sec -= min*60;
-				if(hours <= 9) hours = '0' + hours;
-				if(min <= 9) min = '0' + min;
-				if(sec <= 9) sec = '0' + sec;
+				timeToEnd_ID[#TIMEREXISTS_ID#] = --index_ID[#TIMEREXISTS_ID#];
+				sec_ID[#TIMEREXISTS_ID#] = timeToEnd_ID[#TIMEREXISTS_ID#];
+				days_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60/60/24);
+				sec_ID[#TIMEREXISTS_ID#] -= days_ID[#TIMEREXISTS_ID#]*24*60*60;
+				hours_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60/60);
+				sec_ID[#TIMEREXISTS_ID#] -= hours_ID[#TIMEREXISTS_ID#]*60*60;
+				min_ID[#TIMEREXISTS_ID#] = Math.floor(sec_ID[#TIMEREXISTS_ID#]/60);
+				sec_ID[#TIMEREXISTS_ID#] -= min_ID[#TIMEREXISTS_ID#]*60;
+				if(hours_ID[#TIMEREXISTS_ID#] <= 9) hours_ID[#TIMEREXISTS_ID#] = '0' + hours_ID[#TIMEREXISTS_ID#];
+				if(min_ID[#TIMEREXISTS_ID#] <= 9) min_ID[#TIMEREXISTS_ID#] = '0' + min_ID[#TIMEREXISTS_ID#];
+				if(sec_ID[#TIMEREXISTS_ID#] <= 9) sec_ID[#TIMEREXISTS_ID#] = '0' + sec_ID[#TIMEREXISTS_ID#];
 				
-				if(index >= 1) {
-					timerBlock.html(days + ' ' + hours + ':' + min + ':' + sec);
+				if(index_ID[#TIMEREXISTS_ID#] >= 1) {
+					timerBlock_ID[#TIMEREXISTS_ID#].html(days_ID[#TIMEREXISTS_ID#] + ' ' + hours_ID[#TIMEREXISTS_ID#] + ':' + min_ID[#TIMEREXISTS_ID#] + ':' + sec_ID[#TIMEREXISTS_ID#]);
 				} else {
-					timerBlock.html('[#SET_TEXTTOEND#]');
+					timerBlock_ID[#TIMEREXISTS_ID#].html('[#SET_TEXTTOEND#]');
 				}
 			[#endif#]
 		[#else#]
-			if(index >= 0) { 
-				timerBlock.html(--index);
+			if(index_ID[#TIMEREXISTS_ID#] >= 0) { 
+				timerBlock_ID[#TIMEREXISTS_ID#].html(--index_ID[#TIMEREXISTS_ID#]);
 			} else {
-				timerBlock.html('[#SET_TEXTTOEND#]');
+				timerBlock_ID[#TIMEREXISTS_ID#].html('[#SET_TEXTTOEND#]');
 			}
 		[#endif#]
 	}, 1000);
 
 	setTimeout(function() {
 		//clearInterval(timerId);
-		[#if SET_WAIT!=1#]clearInterval(timerAjax);[#endif#]
-	}, num*1000);
+		[#if SET_WAIT!=1#]clearInterval(timerAjax_ID[#TIMEREXISTS_ID#]);[#endif#]
+	}, num_ID[#TIMEREXISTS_ID#]*1000);
 });
 </script>
 <span id="timerTimeID_[#TIMEREXISTS_ID#]">[#if TIMEREXISTS=='Таймер сейчас не активен'#]0[#else#][#TIMEREXISTS#][#endif#]</span>

@@ -79,10 +79,11 @@
 				Так же, вы можете добавить параметры в view_mode="ajax=5;time=m;textToEnd=Все помер таймер":<br>
 				<b>ajax=5</b> - каждые 5 секунд будет отправляться AJAX для того, чтобы узнать статус таймера<br>
 				<b>time=m</b> - time= может принимать:s - только секунды; h - только минуты; h:m:s - часы, минуты, секунды; m:s - минуты, секунды; h:m - часы, минуты<br>
-				<b>textToEnd=Все помер таймер</b> - Текст, который будет выведен после завершения отсчета
+				<b>textToEnd=Все помер таймер</b> - Текст, который будет выведен после завершения отсчета<br>
+				<b>wait=1</b> - Ждать пока таймер снова появится и если это произойдет, скрипт начнет отсчет без перезагрузки страницы. Обязателен параметр ajax=?
 				</p>
 				<div style="margin-top: 10px;background-color: #f9f2f4;padding: 10px;border-radius: 10px;border: 1px solid #f1acac;font-size: 1.3rem;color: #c7254e;" id="codeModalAdd">
-					[ #module name="system_timers" mode="<span class="insertTimerName"></span>" view_mode="ajax=5;time=m"#]
+					[ #module name="system_timers" mode="<span class="insertTimerName"></span>" view_mode="ajax=5;time=h:m:s;wait=1;texttoend=БУМ!"#]
 				</div>
 			</div>
 			<div class="modal-footer">
