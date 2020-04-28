@@ -115,7 +115,8 @@ $(document).ready(function(){
 				if(sec_ID[#TIMEREXISTS_ID#] <= 9) sec_ID[#TIMEREXISTS_ID#] = '0' + sec_ID[#TIMEREXISTS_ID#];
 				
 				if(index_ID[#TIMEREXISTS_ID#] >= 1) {
-					timerBlock_ID[#TIMEREXISTS_ID#].html(days_ID[#TIMEREXISTS_ID#] + ' ' + hours_ID[#TIMEREXISTS_ID#] + ':' + min_ID[#TIMEREXISTS_ID#] + ':' + sec_ID[#TIMEREXISTS_ID#]);
+					if(days_ID[#TIMEREXISTS_ID#] != '') days_with = days_ID[#TIMEREXISTS_ID#] + ' д. ';
+					timerBlock_ID[#TIMEREXISTS_ID#].html(days_with + hours_ID[#TIMEREXISTS_ID#] + ':' + min_ID[#TIMEREXISTS_ID#] + ':' + sec_ID[#TIMEREXISTS_ID#]);
 				} else {
 					timerBlock_ID[#TIMEREXISTS_ID#].html('[#SET_TEXTTOEND#]');
 				}
