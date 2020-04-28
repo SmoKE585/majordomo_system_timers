@@ -4,7 +4,7 @@ class system_timers extends module {
     $this->name="system_timers";
     $this->title="Системные таймеры";
     $this->module_category="<#LANG_SECTION_SYSTEM#>";
-    $this->version="1.9";
+    $this->version="2.1";
     $this->checkInstalled();
   }
 
@@ -82,6 +82,11 @@ class system_timers extends module {
 			$out['ALLTIMERS'][$key]['TIMEREXISTS'] = $this->timerExists($timers[$key]['ID']);
 		}
 		
+		if($this->mode == 'deltimer' && !empty($this->view_mode)) {
+			SQLExec("DELETE FROM `jobs` WHERE ID = '".(int) strip_tags($this->view_mode)."' LIMIT 1");
+			$this->redirect("?");
+		}
+
 		$out['VERSION_MODULE'] = $this->version;
 	}
 
