@@ -50,12 +50,12 @@
 			}, num*1000);
 		});
 		</script>
-		<form action="?" method="post" enctype="multipart/form-data" id="deleteTimerForm">
+		<form action="?" method="post" enctype="multipart/form-data" id="deleteTimerForm_ID[#ID#]">
 			<input type="hidden" name="mode" value="deltimer">
 			<input type="hidden" name="view_mode" value="[#ID#]">
 		</form>
 	   <tr>
-		  <td valign="middle" style="padding: 3px;vertical-align: middle;width: 4%;"><a href="javascript://" onclick="if(confirm('Удалить и остановить выполнение таймера?')) {document.getElementById('deleteTimerForm').submit();}"><img src="/templates/system_timers/img/delete.png" style="width: 30px;vertical-align: sub;"></a></td>
+		  <td valign="middle" style="padding: 3px;vertical-align: middle;width: 4%;"><a href="javascript://" onclick="if(confirm('Удалить и остановить выполнение таймера?')) {document.getElementById('deleteTimerForm_ID[#ID#]').submit();}"><img src="/templates/system_timers/img/delete.png" style="width: 30px;vertical-align: sub;"></a></td>
 		  <td valign="middle" style="padding: 3px;vertical-align: middle;width: 8%;">[#ID#]</td>
 		  <td valign="middle" style="padding: 3px;vertical-align: middle;">[#TITLE#]</td>
 		  <td valign="middle" style="padding: 3px;vertical-align: middle;">[#COMMANDS#]</td>
